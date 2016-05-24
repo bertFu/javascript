@@ -1,11 +1,11 @@
-# Airbnb React/JSX Style Guide
+# Airbnb React/JSX 编码规范
 
-*A mostly reasonable approach to React and JSX*
+*一个最合理的React/JSX编发规范*
 
-## Table of Contents
+## 内容目录
 
-  1. [Basic Rules](#basic-rules)
-  1. [Class vs `React.createClass` vs stateless](#class-vs-reactcreateclass-vs-stateless)
+  1. [基本规范](#basic-rules)
+  1. [使用类Class, `React.createClass`, 和无状态方法](#class-vs-reactcreateclass-vs-stateless)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
   1. [Alignment](#alignment)
@@ -20,14 +20,14 @@
 
 ## Basic Rules
 
-  - Only include one React component per file.
-    - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
-  - Always use JSX syntax.
-  - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
+  - 每个文件只写一个模块Only include one React component per file.
+    - 但是多个[无状态模块](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)可以放在单个文件中. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
+  - 推荐使用JSX语法.
+  - 不要使用 `React.createElement`，除非从一个非JSX的文件中初始化你的app.
 
 ## Class vs `React.createClass` vs stateless
 
-  - If you have internal state and/or refs, prefer `class extends React.Component` over `React.createClass` unless you have a very good reason to use mixins. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
+  - 如果你的模块有内部状态或者是`refs`, 推荐使用 `class extends React.Component` 而不是 `React.createClass` ,除非你有充足的理由来使用这些方法. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
 
     ```jsx
     // bad
@@ -47,7 +47,7 @@
     }
     ```
 
-    And if you don't have state or refs, prefer normal functions (not arrow functions) over classes:
+    如果你的模块没有状态或是没有引用`refs`， 推荐使用普通函数（不是箭头函数）而不是类:
 
     ```jsx
     // bad
