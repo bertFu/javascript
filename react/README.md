@@ -1,6 +1,6 @@
 # Airbnb React/JSX 编码规范
 
-*算是最合理的React/JSX编发规范之一了*
+*算是最合理的React/JSX编码规范之一了*
 
 ## 内容目录
 
