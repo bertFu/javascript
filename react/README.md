@@ -12,6 +12,7 @@
   1. [单引号还是双引号](#quotes-单引号还是双引号)
   1. [空格](#spacing-空格)
   1. [属性](#props-属性)
+  1. [Refs引用](#refs)
   1. [括号](#parentheses-括号)
   1. [标签](#tags-标签)
   1. [函数/方法](#methods-函数)
@@ -102,7 +103,32 @@
     // good
     import Footer from './Footer';
     ```
+  - **高阶模块命名**: 对于生成一个新的模块，其中的模块名 `displayName` 应该为高阶模块名和传入模块名的组合. 例如, 高阶模块 `withFoo()`, 当传入一个 `Bar` 模块的时候， 生成的模块名 `displayName` 应该为 `withFoo(Bar)`.
 
+  > 为什么？一个模块的 `displayName` 可能会在开发者工具或者错误信息中使用到，因此有一个能清楚的表达这层关系的值能帮助我们更好的理解模块发生了什么，更好的Debug.
+
+    ```jsx
+    // bad
+    export default function withFoo(WrappedComponent) {
+      return function WithFoo(props) {
+        return <WrappedComponent {...props} foo />;
+      }
+    }
+
+    // good
+    export default function withFoo(WrappedComponent) {
+      function WithFoo(props) {
+        return <WrappedComponent {...props} foo />;
+      }
+
+      const wrappedComponentName = WrappedComponent.displayName
+        || WrappedComponent.name
+        || 'Component';
+
+      WithFoo.displayName = `withFoo(${wrappedComponentName})`;
+      return WithFoo;
+    }
+    ```
 ## Declaration 声明模块
 
   - 不要使用 `displayName` 来命名React模块，而是使用引用来命名模块， 如 class 名称.
@@ -299,6 +325,23 @@
     />
   ))}
   ```
+
+## Refs
+
+  - 总是在Refs里使用回调函数. eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
+
+    ```jsx
+    // bad
+    <Foo
+      ref="myRef"
+    />
+
+    // good
+    <Foo
+      ref={ref => { this.myRef = ref; }}
+    />
+    ```
+
 
 ## Parentheses 括号
 
